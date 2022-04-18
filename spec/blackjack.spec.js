@@ -29,16 +29,15 @@ describe('blackjack', () => {
   })
 
   it('set-up hand for Player', () => {
-    const cardDeck = new CardDeck()
-    const newCardDeck = cardDeck.createDeck()
-    const blackjack = new Blackjack(newCardDeck)
+    const deck = new CardDeck()
+    deck.createDeck()
+    const blackjack = new Blackjack()
     const playerOne = blackjack.addPlayerToGame(1, 'playerOne', 1000)
 
-    console.log(blackjack.newCardDeck)
-
     blackjack.dealACardToAPlayerID(1)
     blackjack.dealACardToAPlayerID(1)
 
+    expect(blackjack.playerArray.length).toEqual(1)
     expect(playerOne.hand.length).toEqual(2)
   })
 })

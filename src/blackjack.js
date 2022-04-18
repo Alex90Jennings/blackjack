@@ -17,8 +17,7 @@ const cardValue = {
   13: 10
 }
 class Blackjack {
-  constructor(cardDeck) {
-    this.cardDeck = cardDeck
+  constructor() {
     this.playerArray = []
   }
 
@@ -33,11 +32,10 @@ class Blackjack {
       const player = this.playerArray[i]
       if (id === player.id) {
         const card = CardDeck.dealCard()
-        player.hand.push(card)
-      } else {
-        return false
+        return player.hand.push(card)
       }
     }
+    return false
   }
 
   countScore(hand) {
