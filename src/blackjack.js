@@ -2,7 +2,6 @@ const Player = require('./player')
 const CardDeck = require('./card_deck')
 
 const cardValue = {
-  14: 1,
   2: 2,
   3: 3,
   4: 4,
@@ -14,11 +13,14 @@ const cardValue = {
   10: 10,
   11: 10,
   12: 10,
-  13: 10
+  13: 10,
+  14: 1
 }
 class Blackjack {
   constructor() {
     this.playerArray = []
+    this.deck
+    this.createDeck()
   }
 
   addPlayerToGame(id, playerName, wallet) {
@@ -27,11 +29,16 @@ class Blackjack {
     return player
   }
 
+  createDeck() {
+    this.deck = new CardDeck()
+    this.deck.createDeck()
+  }
+
   dealACardToAPlayerID(id) {
     for (let i = 0; i < this.playerArray.length; i++) {
       const player = this.playerArray[i]
       if (id === player.id) {
-        const card = CardDeck.dealCard()
+        const card = this.deck.dealCard()
         return player.hand.push(card)
       }
     }

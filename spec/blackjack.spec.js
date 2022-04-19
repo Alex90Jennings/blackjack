@@ -29,8 +29,6 @@ describe('blackjack', () => {
   })
 
   it('set-up hand for Player', () => {
-    const deck = new CardDeck()
-    deck.createDeck()
     const blackjack = new Blackjack()
     const playerOne = blackjack.addPlayerToGame(1, 'playerOne', 1000)
 
@@ -39,5 +37,34 @@ describe('blackjack', () => {
 
     expect(blackjack.playerArray.length).toEqual(1)
     expect(playerOne.hand.length).toEqual(2)
+    expect(blackjack.deck.cardDeck.length).toEqual(50)
+  })
+
+  it('set-up hand for Player that does not exist', () => {
+    const blackjack = new Blackjack()
+    const playerTwo = blackjack.addPlayerToGame(2, 'playerOne', 1000)
+
+    blackjack.dealACardToAPlayerID(1)
+    blackjack.dealACardToAPlayerID(1)
+
+    expect(blackjack.playerArray.length).toEqual(1)
+    expect(playerTwo.hand.length).toEqual(0)
+    expect(blackjack.deck.cardDeck.length).toEqual(52)
+  })
+
+  it('set-up hand for two Players', () => {
+    const blackjack = new Blackjack()
+    const playerOne = blackjack.addPlayerToGame(1, 'playerOne', 1000)
+    const playerTwo = blackjack.addPlayerToGame(2, 'playerOne', 1000)
+
+    blackjack.dealACardToAPlayerID(1)
+    blackjack.dealACardToAPlayerID(1)
+    blackjack.dealACardToAPlayerID(2)
+    blackjack.dealACardToAPlayerID(2)
+
+    expect(blackjack.playerArray.length).toEqual(2)
+    expect(playerOne.hand.length).toEqual(2)
+    expect(playerTwo.hand.length).toEqual(2)
+    expect(blackjack.deck.cardDeck.length).toEqual(48)
   })
 })
