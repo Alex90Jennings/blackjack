@@ -232,7 +232,7 @@ describe('blackjack', () => {
 
     const result = blackjack.isTwentyOne(playerHand)
 
-    expect(result).toEqual(Blackjack)
+    expect(result).toEqual(0)
   })
 
   it('player gets blackjack', () => {
@@ -241,6 +241,6 @@ describe('blackjack', () => {
 
     const result = blackjack.isTwentyOne(playerHand)
 
-    expect(result).toEqual(true)
+    expect(result).toEqual(21)
   })
 })

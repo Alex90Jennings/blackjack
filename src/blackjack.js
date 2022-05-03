@@ -2,27 +2,14 @@ const Player = require('./player')
 const CardDeck = require('./card_deck')
 const Dealer = require('./dealer')
 
-const cardValue = {
-  2: 2,
-  3: 3,
-  4: 4,
-  5: 5,
-  6: 6,
-  7: 7,
-  8: 8,
-  9: 9,
-  10: 10,
-  11: 10,
-  12: 10,
-  13: 10,
-  14: 1
-}
+const cardValue = {2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 10, 12: 10, 13: 10, 14: 1}
+
 class Blackjack {
   constructor() {
     this.playerArray = []
-    this.deck
+    this.deck = null
     this.createDeck()
-    this.dealer
+    this.dealer = this.addDealer()
   }
 
   addDealer(){
@@ -68,11 +55,13 @@ class Blackjack {
       if(this.handHasAce(hand)){
         if(numberOfCard === 14 && !aceIsEleven){
           aceIsEleven = true
-          sum += 10}
+          sum += 10
+        }
         sum += valueOfCard
         if(sum > 21 && !makeElevenAceOne){
           makeElevenAceOne = true
-          sum = sum - 10}
+          sum = sum - 10
+        }
       } else sum += valueOfCard
     }
     return sum
@@ -93,30 +82,23 @@ class Blackjack {
 
   isTwentyOne(hand) {
     if(this.countScore(hand) === 21){
-      if(hand.length === 2){return Blackjack}
-      else return true
-    } else return false
+      if(hand.length === 2){return 0}
+      else return 21
+    } else return this.countScore(hand)
   }
 
   dealerPlaysHand() {
-    this.dealACardToDealer()
-    this.dealACardToDealer()
-    if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
-    if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
-    if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
-    if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
-    else {
-    console.log(this.dealer.hand)
-    console.log(this.countScore(this.dealer.hand))
-    return this.countScore(this.dealer.hand)
+    while(this.countScore(this.dealer.hand) < 17){
+      this.dealACardToDealer()
     }
+    return this.countScore(this.dealer.hand)
   }
 
   doesPlayerWin(dealerHand, playerHand) {
-    if(this.isBust(playerHand)){return false}
-    if(this.isBust(dealerHand)){return true}
-    if(this.countScore(dealerHand) > this.countScore(playerHand)){return false}
-    if(this.countScore(dealerHand) < this.countScore(playerHand)){return true}
+    if(this.isBust(playerHand)) return false
+    if(this.isBust(dealerHand)) return true
+    if(this.countScore(dealerHand) > this.countScore(playerHand)) return false
+    if(this.countScore(dealerHand) < this.countScore(playerHand)) return true
   }
 }
 
