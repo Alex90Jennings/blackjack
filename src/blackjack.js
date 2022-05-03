@@ -102,6 +102,9 @@ class Blackjack {
     this.dealACardToDealer()
     this.dealACardToDealer()
     if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
+    if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
+    if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
+    if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
     else {
     console.log(this.dealer.hand)
     console.log(this.countScore(this.dealer.hand))
