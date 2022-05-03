@@ -166,6 +166,16 @@ describe('blackjack', () => {
     expect(score).toEqual(32)
   })
 
+    it('count the value of two hands with aces and JQKs(hard coded)', () => {
+    const blackjack = new Blackjack()
+
+    const scoreOne = blackjack.countScore([{ number: 14, suit: 'hearts' }, { number: 14, suit: 'clubs' }, { number: 13, suit: 'hearts' }, { number: 12, suit: 'clubs' }, { number: 10, suit: 'hearts' }])
+    const scoreTwo = blackjack.countScore([{ number: 14, suit: 'diamonds' }, { number: 14, suit: 'spades' }, { number: 13, suit: 'spades' }, { number: 12, suit: 'spades' }, { number: 10, suit: 'spades' }])
+
+    expect(scoreOne).toEqual(32)
+    expect(scoreTwo).toEqual(32)
+  })
+
     it('compare playerOne hand to Dealer hand to see who wins (player wins)', () => {
     const blackjack = new Blackjack()
     const dealerHand = [{ number: 6, suit: 'diamonds' }, { number: 12, suit: 'spades' }]

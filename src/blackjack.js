@@ -98,6 +98,17 @@ class Blackjack {
     } else return false
   }
 
+  dealerPlaysHand() {
+    this.dealACardToDealer()
+    this.dealACardToDealer()
+    if(this.countScore(this.dealer.hand) < 17){this.dealACardToDealer()}
+    else {
+    console.log(this.dealer.hand)
+    console.log(this.countScore(this.dealer.hand))
+    return this.countScore(this.dealer.hand)
+    }
+  }
+
   doesPlayerWin(dealerHand, playerHand) {
     if(this.isBust(playerHand)){return false}
     if(this.isBust(dealerHand)){return true}
